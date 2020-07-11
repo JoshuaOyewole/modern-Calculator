@@ -16,11 +16,11 @@
     }
 
     updateDisplay(){
-
+        this.curOperandText.innerHTML = this.curOperand;
     }
 
     appendNumber(number) {
-        
+        this.curOperand = number;
     }
 
     chooseOperation(operation) {
@@ -45,7 +45,8 @@ const calculator = new Calculator(curOperandText, prevOperandText);
 
 numberBtn.forEach(number=>{
     number.addEventListener('click', () =>{
-        const numberInputed = number.innerHTML;
+        calculator.appendNumber(number.innerHTML);
+        calculator.updateDisplay();
     })
 })
 

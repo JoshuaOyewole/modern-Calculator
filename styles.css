@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+
 *{
     box-sizing: border-box;
     padding: 0;
@@ -15,7 +18,7 @@ body{
     background-position: left center;
     background-size: cover;
     background-attachment: fixed;
-    font-family: Ubuntu, 'san-serif', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .calculator{
@@ -73,4 +76,11 @@ body{
     font-size: 3rem;
     padding-top: 1rem;
     color: rgba(228, 220, 220, 0.952);
+}
+
+@media(max-width:600px){
+    body{
+        background-image: url('city.-small.jpg');
+    }
+    
 }

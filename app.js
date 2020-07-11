@@ -1,17 +1,18 @@
-class Calculator {
-    constructor(curInput, prevInput){
-        this.curInput = curInput;
-        this.prevInput = prevInput;
+ class Calculator {
+    constructor(curOperandText, prevOperandText){
+        this.curOperandText = curOperandText;
+        this.prevOperandText = prevOperandText;
         this.clear();
     }
 
     clear() {
-        this.curInput = "";
-        this.prevInput = "";
+        this.curOperand = "";
+        this.prevOperand = "";
+        this.operation = undefined;
     } 
 
     delete() {
-
+   
     }
 
     updateDisplay(){
@@ -19,7 +20,7 @@ class Calculator {
     }
 
     appendNumber(number) {
-
+        
     }
 
     chooseOperation(operation) {
@@ -37,7 +38,34 @@ const equalBtn = document.querySelector("[data-equal]");
 const delBtn = document.querySelector("[data-delete]");
 const operationBtn = [...document.querySelectorAll("[data-operation]")];
 const numberBtn = [...document.querySelectorAll("[data-number]")];
-const prevInputText = document.querySelector(".current-input");
-const curInputText = document.querySelector(".current-input");
+const prevOperandText = document.querySelector(".previous-input");
+const curOperandText = document.querySelector(".current-input");
 
-const calculator = new Calculator(curInputText, prevInputText);
+const calculator = new Calculator(curOperandText, prevOperandText);
+
+numberBtn.forEach(number=>{
+    number.addEventListener('click', () =>{
+        const numberInputed = number.innerHTML;
+    })
+})
+
+operationBtn.forEach(operator=>{
+    operator.addEventListener('click', () =>{
+        const operatorSelected = operator.innerHTML;
+    })
+})
+
+delBtn.addEventListener('click', (e)=>{
+    console.log(e.target.innerHTML);
+})
+
+equalBtn.addEventListener('click', (e)=>{
+    console.log(e.target.innerHTML);
+})
+
+
+allClear.addEventListener('click', clear =>{
+    console.log(clear.target.innerHTML);
+
+})
+

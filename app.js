@@ -17,20 +17,54 @@
 
     updateDisplay(){
         this.curOperandText.innerHTML = this.curOperand;
+            if(this.operation != null){
+                this.prevOperandText.innerText = `${this.prevOperand} ${this.operation}`
+            }
     }
 
     appendNumber(number) {
-        this.curOperand = number;
+        if(this.curOperand.includes(".") && number === ".") return
+        this.curOperand = this.curOperand.toString() + number.toString();
     }
 
     chooseOperation(operation) {
-
+        if(this.curOperand === "")return
+            if(this.prevOperand !== "") {
+            this.calculate();
+        }
+        this.operation = operation;
+        this.prevOperand = this.curOperand;
+        this.curOperand = "";
     }
 
     calculate() {
+        let computation;
+        let prev = parseFloat(this.prevOperand);
+        let current = parseFloat(this.curOperand);
+        if(isNaN(prev) || isNaN(current)) return
+            switch(this.operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '-':
+                    computation = prev - current;
+                    break;
+                case '*':
+                    computation = prev * current;
+                    break;
+                 case '/':
+                     computation = prev / current;
+                    break;
+                default:
+                    return
+            }
+            this.curOperand = computation;
+            this.operation = undefined;
+            this.prevOperand = ""
 
-    }
+        }
 }
+
 
 
 const allClear = document.querySelector("[data-clear]");
@@ -52,7 +86,8 @@ numberBtn.forEach(number=>{
 
 operationBtn.forEach(operator=>{
     operator.addEventListener('click', () =>{
-        const operatorSelected = operator.innerHTML;
+        calculator.appendNumber(operator.innerHTML);
+        calculator.updateDisplay();
     })
 })
 
@@ -61,12 +96,13 @@ delBtn.addEventListener('click', (e)=>{
 })
 
 equalBtn.addEventListener('click', (e)=>{
-    console.log(e.target.innerHTML);
+    calculator.calculate();
+    calculator.updateDisplay();
 })
 
 
 allClear.addEventListener('click', clear =>{
-    console.log(clear.target.innerHTML);
-
+    calculator.clear();
+    calculator.updateDisplay();
 })
 

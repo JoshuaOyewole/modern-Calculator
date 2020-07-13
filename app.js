@@ -12,33 +12,32 @@
     } 
 
     delete() {
-   
+        this.curOperand = this.curOperand.toString().slice(0,-1);
     }
 
     updateDisplay(){
         this.curOperandText.innerHTML = this.curOperand;
-            if(this.operation != null){
-                this.prevOperandText.innerText = `${this.prevOperand} ${this.operation}`
-            }
+        this.prevOperandText.innerHTML = this.prevOperand;
     }
 
     appendNumber(number) {
-        if(this.curOperand.includes(".") && number === ".") return
+        if(this.curOperand.includes(".") && number === ".") return  
         this.curOperand = this.curOperand.toString() + number.toString();
     }
 
-    chooseOperation(operation) {
-        if(this.curOperand === "")return
-            if(this.prevOperand !== "") {
-            this.calculate();
-        }
-        this.operation = operation;
+    chooseOperation(operator) {
+         if(this.curOperand === "") return
+
+         if(this.prevOperand !== ""){
+            this.calculate()
+        } 
+        this.operation = operator;
         this.prevOperand = this.curOperand;
         this.curOperand = "";
     }
 
     calculate() {
-        let computation;
+         let computation;
         let prev = parseFloat(this.prevOperand);
         let current = parseFloat(this.curOperand);
         if(isNaN(prev) || isNaN(current)) return
@@ -60,7 +59,7 @@
             }
             this.curOperand = computation;
             this.operation = undefined;
-            this.prevOperand = ""
+            this.prevOperand = "" 
 
         }
 }
@@ -86,13 +85,15 @@ numberBtn.forEach(number=>{
 
 operationBtn.forEach(operator=>{
     operator.addEventListener('click', () =>{
-        calculator.appendNumber(operator.innerHTML);
+         
+        calculator.chooseOperation(operator.innerHTML);
         calculator.updateDisplay();
     })
 })
 
-delBtn.addEventListener('click', (e)=>{
-    console.log(e.target.innerHTML);
+delBtn.addEventListener('click', del => {
+  calculator.delete();
+  calculator.updateDisplay();
 })
 
 equalBtn.addEventListener('click', (e)=>{

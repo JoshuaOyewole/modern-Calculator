@@ -72,7 +72,7 @@ body{
     word-break: break-all; 
 }
  */
-.previous-input{
+.current-input{
     font-size: 3rem;
     padding-top: 1rem;
     color: rgba(228, 220, 220, 0.952);
